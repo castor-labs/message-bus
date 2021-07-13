@@ -17,14 +17,14 @@ declare(strict_types=1);
 namespace Castor\MessageBus;
 
 /**
- * Class ExecuteMultiple allows you to execute multiple commands at the same
+ * Class HandleMultiple allows you to execute multiple commands at the same
  * stack frame.
  *
  * This is useful, for instance, if you want to execute multiple commands in
  * the same database transaction. You just need to place this middleware after
  * the transactional one.
  */
-final class ExecuteMultiple implements Middleware
+final class HandleMultiple implements Middleware
 {
     public function process(object $message, Stack $stack): void
     {

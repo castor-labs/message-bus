@@ -32,6 +32,8 @@ class Multi implements Countable, IteratorAggregate
 
     /**
      * Multi constructor.
+     *
+     * @psalm-param object[] $messages
      */
     public function __construct(array $messages = [])
     {
@@ -43,6 +45,9 @@ class Multi implements Countable, IteratorAggregate
         $this->messages[] = $message;
     }
 
+    /**
+     * @psalm-param  iterable<object> $commands
+     */
     public static function wrap(iterable $commands): Multi
     {
         if (is_array($commands)) {
@@ -66,6 +71,9 @@ class Multi implements Countable, IteratorAggregate
         return $this->messages;
     }
 
+    /**
+     * @return Generator<array-key,object>
+     */
     public function getIterator(): Generator
     {
         yield from $this->messages;

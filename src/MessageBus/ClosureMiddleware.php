@@ -38,6 +38,7 @@ final class ClosureMiddleware implements Middleware
     public static function lazy(string $service, ContainerInterface $container): ClosureMiddleware
     {
         return new self(static function (object $command, Stack $stack) use ($service, $container) {
+            /** @psalm-var object $middleware */
             $middleware = $container->get($service);
             if (is_callable($middleware)) {
                 $middleware = self::make($middleware);

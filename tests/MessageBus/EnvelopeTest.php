@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
  * Class EnvelopeTest.
  *
  * @internal
- * @coversNothing
+ * @covers \Castor\MessageBus\Envelope
  */
 class EnvelopeTest extends TestCase
 {

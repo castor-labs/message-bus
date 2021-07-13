@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \Castor\MessageBus\Multi
  */
 class MultiTest extends TestCase
 {

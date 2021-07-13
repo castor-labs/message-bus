@@ -20,16 +20,16 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \Castor\MessageBus\HandleMultiple
  */
-class ExecuteMultipleTest extends TestCase
+class HandleMultipleTest extends TestCase
 {
     public function testItDoesNotExecuteMultiple(): void
     {
         $message = new \stdClass();
         $stack = $this->createMock(Stack::class);
         $handler = $this->createMock(Handler::class);
-        $middleware = new ExecuteMultiple();
+        $middleware = new HandleMultiple();
 
         $stack->expects($this->once())
             ->method('next')
@@ -49,7 +49,7 @@ class ExecuteMultipleTest extends TestCase
         $messageTwo = new \stdClass();
         $stack = $this->createMock(Stack::class);
         $handler = $this->createMock(Handler::class);
-        $middleware = new ExecuteMultiple();
+        $middleware = new HandleMultiple();
 
         $stack->expects($this->exactly(2))
             ->method('next')
@@ -73,7 +73,7 @@ class ExecuteMultipleTest extends TestCase
         $messageTwo = new \stdClass();
         $stack = $this->createMock(Stack::class);
         $handler = $this->createMock(Handler::class);
-        $middleware = new ExecuteMultiple();
+        $middleware = new HandleMultiple();
 
         $stack->expects($this->exactly(2))
             ->method('next')

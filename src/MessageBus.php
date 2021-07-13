@@ -18,7 +18,6 @@ namespace Castor;
 
 use Castor\MessageBus as Bus;
 use InvalidArgumentException;
-use Traversable;
 
 /**
  * Class MessageBus.
@@ -26,21 +25,34 @@ use Traversable;
 final class MessageBus implements Bus\Handler
 {
     /**
-     * @var array<int,Bus\Middleware>
+     * @var Bus\Middleware[]
      */
     private array $middleware;
 
     /**
      * Bus constructor.
+     *
+     * @psalm-param array<int,Bus\Middleware> $messages
      */
     public function __construct(Bus\Middleware ...$middleware)
     {
         $this->middleware = $middleware;
     }
 
-    public static function fromIterator(Traversable $traversable): MessageBus
+    /**
+     * @psalm-param iterable<int,Bus\Middleware> $iterable
+     */
+    public static function fromIterable(iterable $iterable): MessageBus
     {
-        return new self(...iterator_to_array($traversable));
+        if (is_array($iterable)) {
+            return new self(...$iterable);
+        }
+        $bus = new self();
+        foreach ($iterable as $middleware) {
+            $bus->add($middleware);
+        }
+
+        return $bus;
     }
 
     public function add(Bus\Middleware $middleware): void

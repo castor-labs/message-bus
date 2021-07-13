@@ -47,6 +47,7 @@ final class ContainerLocator implements Locator
     public function locate(string $handlerName): Handler
     {
         try {
+            /** @psalm-var object $handler */
             $handler = $this->container->get($handlerName);
         } catch (NotFoundExceptionInterface $e) {
             throw new HandlerNotFound(sprintf(

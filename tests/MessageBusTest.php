@@ -27,7 +27,7 @@ use PHPUnit\Framework\TestCase;
  * Class MessageBusTest.
  *
  * @internal
- * @coversNothing
+ * @covers \Castor\MessageBus
  */
 class MessageBusTest extends TestCase
 {

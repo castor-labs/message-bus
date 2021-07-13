@@ -16,6 +16,10 @@ declare(strict_types=1);
 
 namespace Castor\MessageBus;
 
+use Castor\MessageBus\Handler\ClassSuffixInflector;
+use Castor\MessageBus\Handler\ContainerLocator;
+use Psr\Container\ContainerInterface;
+
 /**
  * Class HandleMessage.
  */
@@ -31,6 +35,14 @@ final class HandleMessage implements Middleware
     {
         $this->inflector = $inflector;
         $this->locator = $locator;
+    }
+
+    public static function usingContainer(ContainerInterface $container, string $suffix = 'Handler'): HandleMessage
+    {
+        return new self(
+            new ClassSuffixInflector($suffix),
+            new ContainerLocator($container)
+        );
     }
 
     /**
